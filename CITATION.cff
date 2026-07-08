@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this work or code, please cite the thesis below."
+type: thesis
+title: "Transformation-Invariance Properties of Grad-CAM in Convolutional Neural Networks"
+authors:
+  - family-names: "Roy"
+    given-names: "Emon"
+year: 2025
+month: 12
+institution:
+  name: "Ontario Tech University (University of Ontario Institute of Technology)"
+  address: "Oshawa, Ontario, Canada"
+keywords:
+  - "Grad-CAM"
+  - "Explainable AI"
+  - "Convolutional Neural Networks"
+  - "Transformation Invariance"
+  - "Heatmap Averaging"
+  - "Post-hoc Explanation"
+  - "Image Classification"

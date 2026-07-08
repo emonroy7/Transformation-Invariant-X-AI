@@ -1,0 +1,22 @@
+# Core deep learning (Keras layer names in the thesis imply a TensorFlow/Keras stack)
+tensorflow>=2.13,<2.17
+
+# Numerics / image processing
+numpy>=1.24
+scipy>=1.10
+opencv-python>=4.8
+scikit-image>=0.21
+Pillow>=10.0
+
+# Metrics / data handling
+scikit-learn>=1.3      # roc_auc_score, ROC curves
+pandas>=2.0            # results tables
+
+# Visualization
+matplotlib>=3.7
+seaborn>=0.12
+
+# Utilities
+tqdm>=4.65             # progress bars over dataset sweeps
+PyYAML>=6.0            # experiment configs
+pycocotools>=2.0.6     # MS COCO annotations (optional, for COCO experiments)
