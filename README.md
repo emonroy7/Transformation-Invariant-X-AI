@@ -232,4 +232,4 @@ This project began as my MSc thesis in Computer Science at **Ontario Tech Univer
 
 An earlier version of the work was accepted as a **poster presentation** at the *Conference on Vision and Intelligent Systems (CVIS 2024)*, University of Waterloo — [view the poster](https://github.com/emonroy7/CVIS2024/blob/main/poster.pdf).
 
-The complete thesis is publicly available in Ontario Tech University's institutional repository, **eScholar**: [hdl.handle.net/10155/2057](https://hdl.handle.net/10155/2057).
+The complete thesis is publicly available in Ontario Tech University's institutional repository. <br>                                 **eScholar**: [hdl.handle.net/10155/2057](https://hdl.handle.net/10155/2057).
