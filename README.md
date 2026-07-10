@@ -9,8 +9,8 @@ that most influence a target class, using the gradients flowing into the final
 convolutional layer. But Grad-CAM is **not transformation-invariant**: rotating,
 zooming, or shifting the same image can noticeably change the heatmap even when the
 prediction stays the same. This project quantifies that instability across three CNN
-backbones and proposes a **realignment-and-averaging framework** that yields rotation-,
-zoom-, and shift-invariant heatmaps — **without retraining the model**.
+backbones and proposes a **realignment-and-averaging framework** that yields rotation,
+zoom, and shift-invariant heatmaps **without retraining the model**.
 
 <p align="center">
   <img src="assets/fig1_gradcam_examples.png" alt="Grad-CAM examples" width="300">
@@ -41,12 +41,12 @@ the aligned maps into a single, transformation-invariant explanation. It is appl
 independently to four transformation families.
 
 <p align="center">
-  <img src="assets/fig3_methodology_overview.jpg" alt="Proposed methodology overview" width="920">
+  <img src="assets/Model_Architechture.jpg" alt="Proposed methodology overview" width="920">
   <br>
-  <em>Figure 3: Overview of the proposed methodology — an image is pre-processed and
+  <em>Figure 2: Overview of the proposed methodology — an image is pre-processed and
   transformed (rotation, zoom, shift-X, shift-Y), passed through a CNN backbone,
   explained with Grad-CAM, inverse-transformed back to the original frame, and
-  averaged to yield rotation-, zoom-, and shift-invariant heatmaps.</em>
+  averaged to yield rotation, zoom, and shift-invariant heatmaps.</em>
 </p>
 
 ### 4.1 Rotation-Invariant Grad-CAM
@@ -111,8 +111,8 @@ $$H_{shiftY\text{-}inv} = \frac{1}{N_y}\sum_{y} H^{y}_{realign}, \quad \text{whe
 ### Overall Pipeline
 
 <p align="center">
-  <img src="assets/fig8_single_image_transforms.jpg" alt="All four transformations on a single image" width="950">
-  <br><em>Figure 6: The complete framework — all four transformations (rotation −180° to +180°,
+  <img src="assets/all_transformations.jpg" alt="All four transformations on a single image" width="950">
+  <br><em>Figure 3: The complete framework — all four transformations (rotation −180° to +180°,
   zoom 0.67× to 1.5×, and horizontal/vertical shifts ±180 px) applied to a single image,
   each Grad-CAM map inverse-aligned and averaged into invariant heatmaps.</em>
 </p>
@@ -170,15 +170,6 @@ Scale up to MS COCO (80 classes with pixel-level masks). Binary ground-truth mas
 built from COCO polygon/RLE annotations, and each backbone's Baseline is compared
 against the four invariant variants by L2 and AUC-ROC.
 
-| Model | Baseline AUC | Rotation-inv (L2 / AUC) | Zoom-inv (L2 / AUC) | Shift-X-inv (L2 / AUC) | Shift-Y-inv (L2 / AUC) |
-|---|---|---|---|---|---|
-| ResNet152 | 0.832 ± 0.021 | 0.25 / 0.851 ± 0.017 | 0.22 / 0.871 ± 0.015 | 0.18 / 0.881 ± 0.016 | 0.20 / 0.870 ± 0.017 |
-| DenseNet201 | 0.846 ± 0.019 | 0.21 / 0.874 ± 0.018 | 0.19 / 0.892 ± 0.013 | 0.15 / 0.901 ± 0.014 | 0.17 / 0.895 ± 0.011 |
-| Xception | 0.827 ± 0.023 | 0.29 / 0.843 ± 0.019 | 0.26 / 0.862 ± 0.018 | 0.22 / 0.849 ± 0.020 | 0.23 / 0.844 ± 0.021 |
-
-*Table 3: MS COCO — Baseline vs. transformation-invariant Grad-CAM (L2 / AUC (µ ± σ);
-lower L2 and higher AUC are better; Baseline L2 = 0 by definition). Every invariant
-variant raises AUC over Baseline, with shift-X and zoom giving the most consistent gains.*
 
 ### Experiment 4 — Histopathology Image Evaluation (CAMELYON16)
 
@@ -186,23 +177,17 @@ Evaluate **zoom-invariant** Grad-CAM on histopathology patches (96 × 96 px; a p
 labeled tumor if its central 32 × 32 region contains tumor tissue). For each patch,
 Grad-CAM maps across zoom levels are inverse-aligned and averaged; stability (L2) and
 faithfulness (AUC-ROC vs. tumor masks) are reported per backbone.
-
-| Model | Setting | L2 Difference | AUC (µ ± σ) |
-|---|---|---|---|
-| ResNet152 | Baseline (1.0×) | 0 | 0.85 ± 0.018 |
-| ResNet152 | Averaged | 0.21 | 0.89 ± 0.012 |
-| DenseNet201 | Baseline (1.0×) | 0 | 0.87 ± 0.016 |
-| DenseNet201 | Averaged | 0.18 | 0.91 ± 0.010 |
-| Xception | Baseline (1.0×) | 0 | 0.83 ± 0.020 |
-| Xception | Averaged | 0.24 | 0.88 ± 0.015 |
-
-*Table 4: CAMELYON16 — zoom-invariance evaluation. Averaging raises AUC for all three
-backbones at a small L2 cost.*
+<p align="center">
+  <img src="assets/Histopathology_Architechture.jpg" alt="histopathology" width="950">
+  <br><em>Figure 4: Workflow for Zoom-Invariant Heatmap Generation on Histopathology  Dataset
+  
+</em>
+</p>
 
 ## 7. Results & Key Findings
 
 - Grad-CAM is **measurably sensitive** to rotation, zoom, and shifts.
-- **Inverse-alignment + averaging materially improves stability** — lower L2 and higher AUC than Baseline.
+- **Inverse-alignment + averaging materially improves stability**. Lower L2 and higher AUC than Baseline.
 - Gains hold **across all three backbones and both domains** (natural and medical images).
 - Achieved with **no model retraining**.
 
@@ -210,7 +195,7 @@ backbones at a small L2 cost.*
 
 This work quantified Grad-CAM's transformation sensitivity, proposed an invariant
 heatmap pipeline based on inverse alignment and averaging, and demonstrated improved
-stability (lower L2, better AUC) across architectures and datasets — a practical step
+stability (lower L2, better AUC) across architectures and datasets, a practical step
 toward trustworthy, consistent visual explanations.
 
 ## 9. Future Directions
@@ -243,13 +228,8 @@ python scripts/run_experiment.py exp1 --model resnet152 --image path/to/img.jpg 
 
 ## About This Project
 
-This work originated as my MSc thesis at **Ontario Tech University**, developed under
-the supervision of **Professor Mehran Ebrahimi**.
+This project began as my MSc thesis in Computer Science at **Ontario Tech University**, carried out under the supervision of **Professor Mehran Ebrahimi**.
 
-Part of this project has been accepted as a Poster presentation at the Conference on
-Vision and Intelligent Systems (CVIS 2024), University of Waterloo.
-Link: [https://github.com/emonroy7/CVIS2024/blob/main/poster.pdf](https://github.com/emonroy7/CVIS2024/blob/main/poster.pdf)
+An earlier version of the work was accepted as a **poster presentation** at the *Conference on Vision and Intelligent Systems (CVIS 2024)*, University of Waterloo — [view the poster](https://github.com/emonroy7/CVIS2024/blob/main/poster.pdf).
 
-My thesis/dissertation/project has been published to the Library's institutional
-repository eScholar.
-URI: [https://hdl.handle.net/10155/2057](https://hdl.handle.net/10155/2057)
+The complete thesis is publicly available in Ontario Tech University's institutional repository, **eScholar**: [hdl.handle.net/10155/2057](https://hdl.handle.net/10155/2057).
