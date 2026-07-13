@@ -1,4 +1,4 @@
-# Transformation-Invariance Properties of Grad-CAM in Convolutional Neural Networks
+# Transformation-Invariance Properties of Grad-CAM in Explainable AI(XAI)
 
 ---
 
