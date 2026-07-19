@@ -2,7 +2,14 @@
 
 ---
 
-## 1. Overview
+## 1. Summary
+**Explainable AI (XAI)** has emerged as a critical field for making deep learning models more 
+transparent and trustworthy, particularly as Convolutional Neural Networks (CNNs) to power 
+state-of-the-art **computer vision** systems despite acting as **"black boxes"**. Among XAI techniques, 
+**Grad-CAM** is one of the most widely adopted. It generates visual heatmaps that highlight the 
+image regions most responsible for a model's prediction, helping researchers and users understand 
+and trust model decisions.
+
 
 **Grad-CAM** explains a CNN's prediction by producing a heatmap over the image regions
 that most influence a target class, using the gradients flowing into the final
